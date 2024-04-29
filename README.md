@@ -28,15 +28,6 @@ Image Recall Repository is a versatile application designed to boost memory rete
 
 ---
 
-## Getting Started
-
-1. **Installation**: Download the app from your device's app store or access it via web browser.
-2. **Sign Up/Login**: Create an account or log in to start using the app.
-3. **Upload Images**: Upload images from your device or capture new ones using the app's camera.
-4. **Organize**: Organize images into categories or albums for easy access.
-5. **Start Training**: Engage in memory training exercises tailored to your preferences.
-6. **Track Progress**: Monitor your progress and improvement over time.
-
 ---
 
 ## Contributing
