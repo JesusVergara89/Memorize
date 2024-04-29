@@ -13,7 +13,10 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            cards // this is the same of the code below
+            ScrollView {
+                cards // this is the same of the code below
+            }
+            Spacer()
             cardCountAdjuster
             //HStack {
             //let emojis: [String] = ["🥰","🤓","🤯","☠️"] this is the same, array of string
@@ -72,10 +75,11 @@ struct ContentView: View {
     }
     
     var cards: some View {
-        HStack {
+        //LazyVGrid(columns: [GridItem(),GridItem(),GridItem()]) {
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))]) {
             ForEach(0..<cardCount,id: \.self){ index in
                 CardView(NewText: emojis[index], isFaceUp: true)
-            }
+            }.aspectRatio(2/3,contentMode: .fit)
         }
         .foregroundColor(Color.red)
     }
@@ -121,15 +125,13 @@ struct CardView: View {
             let Base: RoundedRectangle = RoundedRectangle(cornerRadius: 12)
             //let Base = RoundedRectangle(cornerRadius: 12) type inference, so we can put the type aber the type is implicit
             //let Base = Circle() so we can change the struct or shape of the view ohne bracht to change allein vier places
-            if isFaceUp {
+            Group {
                 Base.fill(.white)
                 Base
                     .strokeBorder(style: StrokeStyle(lineWidth: 2))
                 Text(NewText).font(.largeTitle)
-            }else{
-                Base.fill()
-            }
-            
+            }.opacity(isFaceUp ? 1 : 0)
+            Base.fill().opacity(isFaceUp ? 0 : 1)
         }
         .onTapGesture {
             //print("tapped")// dises print in the console "tapped"
