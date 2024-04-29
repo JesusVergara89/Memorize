@@ -8,21 +8,71 @@
 import SwiftUI
 
 struct ContentView: View {
+    let emojis: Array<String> = ["🥰","🤓","🤯","☠️","😊", "🚀", "🌟", "🎉", "🔥", "🌈", "🐱‍👤", "🍕", "🎈", "💡"]
+    @State var cardCount: Int = 4
+    
     var body: some View {
-        HStack {
-            CardView(NewText: "🥰", isFaceUp: true)
-            CardView(NewText: "🤓")
-            CardView(NewText: "🤯", isFaceUp: true)
-            CardView(NewText: "☠️")
+        VStack {
+            HStack {
+                //let emojis: [String] = ["🥰","🤓","🤯","☠️"] this is the same, array of string
+                //CardView(NewText: emojis[0], isFaceUp: true)
+                //CardView(NewText: emojis[1])
+                // CardView(NewText: emojis[2], isFaceUp: true)
+                //CardView(NewText: emojis[3])
+                
+                //ForEach(0..<4,id: \.self){ index in
+                //CardView(NewText: emojis[index], isFaceUp: true)
+                //}pther way to do forech view
+                //ForEach(emojis.indices,id: \.self){ index in
+                // CardView(NewText: emojis[index], isFaceUp: true)
+                //}
+                ForEach(0..<cardCount,id: \.self){ index in
+                    CardView(NewText: emojis[index], isFaceUp: true)
+                }
+            }
         }
         .foregroundColor(Color.red)
+        .padding()
+        HStack {
+            Button(action: {
+                if cardCount > 1 {
+                    cardCount -= 1
+                }
+            }, label: {
+                Image(systemName: "rectangle.stack.badge.minus.fill")
+            })
+            //.imageScale(.large)individualy
+            //.font(.largeTitle)
+           // Button("Remove card") {
+                //cardCount -= 1 this is the oldfashing wy to do btns
+            //}
+            Spacer()
+           // Button("Add card") {
+               // cardCount += 1
+           // }
+            Button(action: {
+                if cardCount < emojis.count {
+                    cardCount += 1
+                }
+                
+            }, label: {
+                Image(systemName: "rectangle.stack.badge.plus.fill")
+            })
+            //.imageScale(.large)
+            //.font(.largeTitle)
+        }
+        .imageScale(.large)//for all
+        .font(.largeTitle)
+        
         .padding()
     }
 }
 
 
 struct CardView: View {
-    var NewText: String = "😂"
+    //var NewText: String = "😂" if es gibt a default variable wir use a var if es gibt nicht a default variable wir bauchen eine const variable ohne let
+    let NewText: String
+    
     //var NewText = "😂" wir brauchen nicht to specify the type of varible cause es gibt something call type inference
     @State var isFaceUp: Bool = false
     // var isFaceUp = false so wir brachen nicht to specify the type of varibel
